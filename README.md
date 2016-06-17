@@ -37,7 +37,7 @@ function huizhi(emName,emNameEnglish,buName,buNameEnglish,goNumber,goNumberEngli
 
 
     }
-    ```
+```
     
 #angualrJS绑定绘图
 
@@ -73,10 +73,10 @@ function huizhi(emName,emNameEnglish,buName,buNameEnglish,goNumber,goNumberEngli
 
             },100)
     })
-    ```
+```
     #将canvas内容转化为图片，并保存到本地
     
-    ```javascript
+```javascript
      var myCanvas = document.getElementById("canvas");
         // here is the most important part because if you dont replace you will get a DOM 18 exception.
         // var image = myCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream;Content-Disposition: attachment;filename=foobar.png");
@@ -94,4 +94,4 @@ function huizhi(emName,emNameEnglish,buName,buNameEnglish,goNumber,goNumberEngli
             console.log('It\'s saved!');
             alert("保存成功")
         });
-        ```
+```
