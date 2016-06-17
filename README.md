@@ -74,9 +74,7 @@ function huizhi(emName,emNameEnglish,buName,buNameEnglish,goNumber,goNumberEngli
             },100)
     })
     ```
-    
     #将canvas内容转化为图片，并保存到本地
-    
     
     ```javascript
      var myCanvas = document.getElementById("canvas");
