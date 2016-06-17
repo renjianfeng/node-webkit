@@ -38,7 +38,9 @@ function huizhi(emName,emNameEnglish,buName,buNameEnglish,goNumber,goNumberEngli
 
     }
     ```
+    
 #angualrJS绑定绘图
+
 ```javascript
  var app = angular.module('myApp', []);
     app.controller('personCtrl', function($scope) {
@@ -74,6 +76,8 @@ function huizhi(emName,emNameEnglish,buName,buNameEnglish,goNumber,goNumberEngli
     ```
     
     #将canvas内容转化为图片，并保存到本地
+    
+    
     ```javascript
      var myCanvas = document.getElementById("canvas");
         // here is the most important part because if you dont replace you will get a DOM 18 exception.
