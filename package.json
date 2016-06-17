@@ -1,0 +1,33 @@
+{
+
+  "main": "hicss3/index/page/index.html",
+
+  "name": "nw-demo",
+
+  "keywords": [ "demo", "node-webkit" ],
+
+  "nodejs":true,
+
+  "window": {
+
+    "title": "node-webkit demo",
+
+    "icon": "link.png",
+
+    "toolbar": false,
+
+    "frame": false,
+
+    "width": 1200,
+
+    "transparent": true,
+
+    "height": 800,
+
+     "resizable":false
+
+    
+
+  }
+
+}

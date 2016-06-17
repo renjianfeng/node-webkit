@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="/common/image/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Title</title>
+    <!-font-awesome字体图标框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome/css/font-awesome.min.css"/>
+    <!-bootstrap3.0框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/bootstrap/css/bootstrap.min.css"/>
+    <!-angular框架->
+    <script type="text/javascript"  src="../../assets/angularJS/angular.min.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-route.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-animate.min.js"></script>
+
+    <!-绘图FPS->
+    <script type="text/javascript"  src="../../index/js/commonFunctions.js"></script>
+    <!-Dui样式->
+    <link rel="stylesheet" type="text/css" href="../../common/css/diudianUI.css"/>
+    <style>
+        .for_body
+        {
+            border:1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .canvas
+        {
+            background: #ccc;
+        }
+    </style>
+</head>
+
+<body  ng-app="myApp">
+
+<div class="row" ng-controller="personCtrl">
+    <div class="col-xs-3">
+        <div>
+            <button class="btn btn-success">
+                <span class="glyphicon glyphicon-user"></span>创建新的简历
+            </button>
+        </div>
+        <div class="for_body" ng-repeat="lanList in listVeds">
+            <div class="form-group">
+                <div  style="margin-top: 10px;">
+                    <input type="text" class="form-control"  ng-model="listVeds[$index].firstName" placeholder="栏目标题">
+                </div>
+            </div>
+            <div class="form-group">
+                <div  style="margin-top: 10px;">
+                    <textarea class="form-control" rows="3" placeholder="栏目内容" ng-model="listVeds[$index].lastName"></textarea>
+                </div>
+            </div>
+
+            <setdo id="{{lanList.id}}" ng-click="test()">{{listVeds[$index].button}}</setdo>
+            <div class="form-group">
+                <div  style="margin-top: 10px;">
+                    <input type="text" class="form-control"  ng-model="listVeds[$index].mTop" placeholder="距离顶部距离">
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <button class="btn btn-success" ng-click="duishow()">
+                增加栏目
+            </button>
+
+        </div>
+    </div>
+    <div class="col-xs-9">
+        <fff></fff>
+        <canvas class="canvas" id="canvas" width="500" height="600"></canvas>
+    </div>
+</div>
+
+
+
+<script>
+
+    //绘图dom
+    var cavas=document.getElementById('canvas');
+    var context=canvas.getContext('2d');
+    var neirong="";
+    var titleX="";
+    var topd=0;
+    var topd2=0;
+
+    function huizhiTitle(neirong,topd){
+      //  window.requestAnimFrame(huizhiTitle)
+        context.beginPath();
+      //  context.clearRect(0,0,500,600);
+        context.font = "30px 微软雅黑";
+        context.fillText(neirong,50,topd);
+        context.closePath();
+    }
+    function clearR(){
+        context.clearRect(0,0,500,600);
+    }
+    function huizhiCention(neirong,topd){
+        topd2=topd+50;
+        console.log(typeof(topd2));
+        console.log(typeof(topd));
+        console.log("sss1:"+topd);
+        console.log("sss2:"+topd2);
+      //  window.requestAnimFrame(huizhiCention)
+        context.beginPath();
+        context.font = "30px 微软雅黑";
+        context.fillText(neirong,50,topd2);
+        context.closePath();
+
+    }
+
+    var app = angular.module('myApp', ['ngAnimate']);
+    app.controller('personCtrl', function($scope) {
+        $scope.listVeds= [
+            {id:"10",firstName:"1",lastName:"2",button:"删除",mTop:50}
+        ];
+        console.log($scope.listVeds.length);
+            setInterval(function(){
+                clearR()
+                for(i=0;i<$scope.listVeds.length;i++)
+                {
+                    $scope.listVeds[i].mTop=parseInt($scope.listVeds[i].mTop);
+                    console.log($scope.listVeds[i].mTop);
+                    huizhiTitle($scope.listVeds[i].firstName,$scope.listVeds[i].mTop);
+                    huizhiCention($scope.listVeds[i].lastName,$scope.listVeds[i].mTop);
+                }
+
+            },100)
+
+        $scope.countId=1;
+        $scope.duishow = function () {
+            $scope.countId++;
+            $scope.addList={
+                id:$scope.countId,
+                firstName:"Brett1",
+                lastName:"McLaughlin",
+                button:"删除",
+                mTop:50
+            }
+            $scope.listVeds.push($scope.addList);
+        }
+    })
+
+
+
+
+    app.directive("setdo",function(){
+        return{
+            restrict: 'E',
+            template: '<span class="btn btn-warning"><span ng-transclude></span></span>',
+            transclude:true,
+            link:function(scope,element,attrs){
+                scope.listId=attrs.id;
+               // console.log(scope.listId);
+                scope.test=function(){
+                    alert("删除id"+scope.listId);
+                    for(i=0;i<=scope.listVeds.length;i++)
+                    {
+                        if(scope.listVeds[i].id==scope.listId)
+                        {
+                            scope.listVeds.splice(i, 1);
+                        }
+                    }
+                }
+            }
+        }
+    })
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+body
+{
+    font-family: "微软雅黑";
+}
+div,img,button,a,font,input,textarea
+{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);/*透明度alpha设置为0，去掉点击链接和文本框对象时默认的灰色半透明覆盖层(iOS)或者虚框(Android)*/
+    outline: none;
+    /*消除输入框和按钮的原生外观，在iOS上加上这个属性才能给按钮和输入框自定义样式 。   注意：不同type的input使用这个属性之后表现不一。text、button无样式，radio、checkbox直接消失*/
+}
+span:active,img:active,button:active,a:active,input:active,textarea:active,li:active
+{
+    opacity: 0.8;
+}
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ {
+    margin: 0;
+    padding: 0;
+    font-family:"微软雅黑";
+}
+.dui-alert-footer
+{
+    display:box;display:-webkit-box;display:-moz-box;
+    box-orient: horizontal;
+    background: rgba(83,142,213,0.2);
+    margin: 0px;
+    padding: 0.3em 0;
+    text-align: center !important;
+
+}
+.dui-box
+{
+    display:box;display:-webkit-box;display:-moz-box;
+    box-orient: horizontal;
+
+}
+.dui-flex-1
+{
+    box-flex:1;-moz-box-flex:1;-webkit-box-flex:1;
+
+}
+
+.dui-alert-box
+{
+    border:0.1em solid rgba(83,142,213,1);
+    width: 90%;
+    max-width: 750px;
+    border-radius: 0.2em;
+    box-shadow: 0px 0px 0.5em  rgba(83,142,213,1);
+    display: inline-block;
+    background: #fff;
+    text-align: left;
+    margin-top: 2em;
+    position: relative;
+    z-index: 6;
+}
+.dui-button
+{
+    background: rgba(83,142,213,0.3);
+    width: 97%;
+    border:0px solid;
+    border-radius: 0.1em;
+    height: 2em;
+}
+.dui-alert-title
+{
+    margin: 0;
+    background: rgba(83,142,213,0.8);
+    height: 2em;
+    line-height: 1.3em;
+}
+.dui-alert-title h5
+{
+    margin: 0;
+    line-height: 2em;
+    text-indent: 0.5em;
+}
+.dui-alert-cention
+{
+    padding: 0.5em;
+}
+.dui-close-win
+{
+    color: #fff;
+    background: rgba(83,142,213,1);
+    border-radius: 50%;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 1.6em;
+    text-align: center;
+    border: 0.2em solid #fff;
+    float: right;
+    font-size: 0.6em;
+    position: relative;
+    top:-1em;
+    right: -1em;
+}
+.dui-close-win .fa-close
+{
+    position: relative;
+
+}
+.padd_0
+{
+    padding: 0px;
+}
+.dui_alert_bg
+{
+    transition: all linear 0.3s;
+    -webkit-transition: all linear 0.3s;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    text-align: center;
+    opacity: 1;
+
+}
+.dui_pop_box
+{ transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    position: absolute;
+    bottom: -10em;
+    z-index: 6;
+    width: 100%;
+}
+.dui_pop_bg
+{
+    transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    opacity: 1;
+    background: rgba(0,0,0,0.3);
+}
+.inactive
+{
+    transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    bottom: 0em;
+}
+.dui_pop_box
+{
+    border-radius: 0.2em;
+    box-shadow: 0px 0px 0.5em  rgba(83,142,213,1);
+    background: #fff;
+}
+.dui_pop_title h5
+{
+    background:  rgba(83,142,213,1);
+    color: #fff;
+    text-align: center;
+    line-height: 3em;
+}
+.dui_pop_footer h5
+{
+    background:  rgba(0,0,0,0.3);
+    color: #fff;
+    text-align: center;
+    line-height: 3em;
+}
+.dui_ok_button
+{
+    width: 100%;
+    line-height: 3em;
+    border:0px solid;
+    border-radius: 0.3em;
+    background:rgba(83,142,213,0.5);
+    width: 100%;
+    margin: 0.2em 0;
+}
+.dui_pop_cention
+{
+    padding: 0.3em;
+}

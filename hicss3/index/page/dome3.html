@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  ng-app="myApp" ng-controller="personCtrl">
+<head lang="en">
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="/common/image/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Title</title>
+    <!-font-awesome字体图标框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome/css/font-awesome.min.css"/>
+    <!-bootstrap3.0框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/bootstrap/css/bootstrap.min.css"/>
+    <!-angular框架->
+    <script type="text/javascript"  src="../../assets/angularJS/angular.min.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-route.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-animate.min.js"></script>
+    <!-Dui样式->
+    <link rel="stylesheet" type="text/css" href="../../common/css/diudianUI.css"/>
+</head>
+
+<body style="overflow: {{setFlow}};">
+<style>
+    .dui_header h4
+    {
+        background: rgba(83,142,213,1);
+        line-height: 2.5em;
+        text-align: center;
+        color: #fff;
+    }
+    .dui_contion
+    {
+        margin: 0.3em;
+    }
+    .dui_ct_box
+     {
+        transition: all linear 0.2s;
+        -webkit-transition: all linear 0.2s;
+         position: fixed;
+         top: 0;
+         left: -20%;
+         width: 60%;
+         background: #fff;
+         z-index: 6;
+        opacity: 0;
+     }
+    .dui_ct_box_show
+    {
+        transition: all linear 0.2s;
+        -webkit-transition: all linear 0.2s;
+        top: 0;
+        left: 0;
+        width: 60%;
+        height: 100%;
+        background: #fff;
+        z-index: 6;
+        opacity: 1;
+    }
+    .dui_win_body_show
+    {
+        transition: all linear 0.2s;
+        -webkit-transition: all linear 0.2s;
+        -webkit-transform: scale(0.8, 0.8);
+        transform: scale(0.8, 0.8);
+        overflow: hidden;
+        box-shadow: 0px 0px 0.5em #444;
+        left: 60% !important;
+    }
+    .ng-hide {
+        transition: all linear 0.2s;
+        opacity: 0;
+    }
+    .dui_win_body
+    {
+        transition: all linear 0.2s;
+        -webkit-transition: all linear 0.2s;
+        position: relative;
+        left: 0%;
+    }
+    .dui_ct_header
+    {
+        background: rgba(83,142,213,1);;
+        padding: 2em 0;
+    }
+    .dui_user_img
+    {
+        width: 5em;
+        height: 5em;
+        border:0.3em solid rgba(0,0,0,0.2);;
+        border-radius: 50%;
+        margin:0 2.5em;
+        display: inline-block;
+        background: #fff;
+        box-shadow: 0px 0px 0.3em #fff;
+        margin-right: 0.5em;
+    }
+    .dui_user_box
+    {
+        display: inline-block;
+        position: relative;
+        top: -2em;
+        font-size: 1.5em;
+        color: #fff;
+    }
+    .dui_ct_li
+    {
+        border-bottom: 1px solid rgba(83,142,213,0.3);
+        line-height: 3em;
+        text-indent: 1em;
+        color: #444;
+    }
+
+</style>
+<div class="dui_win_body"ng-class="{true: 'dui_win_body', false: 'dui_win_body dui_win_body_show'}[isActive2]" style="height:{{setBodyH}}px">
+
+    <div class="dui_header">
+        <h4>丢点UI</h4>
+    </div>
+    <div class="dui_contion">
+        <button class="dui_ok_button" ng-click="duishow()">点击打开抽屉</button>
+    </div>
+</div>
+<div class="dui_pop_bg"  ng-hide="visible" >
+    <div class="dui_ct_box" ng-class="{true: 'dui_ct_box', false: 'dui_ct_box dui_ct_box_show'}[isActive]">
+        <div class="dui_ct_header">
+            <div class="dui_user_img">
+            </div>
+            <div class="dui_user_box">
+                任建锋
+            </div>
+        </div>
+        <ul>
+            <li class="dui_ct_li">我的消息</li>
+            <li class="dui_ct_li">聊天记录</li>
+            <li class="dui_ct_li">群组</li>
+            <li class="dui_ct_li">个人中心</li>
+            <li class="dui_ct_li">设置</li>
+        </ul>
+    </div>
+    <div class="dui_pop_bg"  ng-hide="visible" ng-click="duinone()"></div>
+</div>
+<script>
+    var winHeight
+    if (window.innerHeight)
+        winHeight = window.innerHeight;
+    else if ((document.body) && (document.body.clientHeight))
+        winHeight = document.body.clientHeight;
+    var app = angular.module('myApp', ['ngAnimate']);
+    app.controller('personCtrl', function($scope) {
+        $scope.setBodyH=winHeight;
+        $scope.visible = true;
+        $scope.isActive=true;
+        $scope.isActive2=true;
+        $scope.setFlow="auto"
+        $scope.duishow = function () {
+            $scope.visible = false;
+            $scope.isActive = false;
+            $scope.isActive2 = false;
+            $scope.setFlow="hidden"
+        }
+        $scope.duinone = function () {
+            $scope.visible = true;
+            $scope.isActive = true;
+            $scope.isActive2 = true;
+            $scope.setFlow="auto"
+        }
+        })
+</script>
+</body>
+</html>

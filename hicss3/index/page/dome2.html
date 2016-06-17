@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="/common/image/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Title</title>
+    <!-font-awesome字体图标框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome/css/font-awesome.min.css"/>
+    <!-bootstrap3.0框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/bootstrap/css/bootstrap.min.css"/>
+    <!-angular框架->
+    <script type="text/javascript"  src="../../assets/angularJS/angular.min.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-route.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-animate.min.js"></script>
+    <!-Dui样式->
+    <link rel="stylesheet" type="text/css" href="../../common/css/diudianUI.css"/>
+</head>
+
+<body  ng-app="myApp" ng-controller="personCtrl">
+<button id="del" ng-click="duishow()">测试</button>
+<style>
+    .ng-hide {
+        transition: all linear 0.2s;
+        -webkit-transition: all linear 0.2s;
+        opacity: 0;
+    }
+</style>
+<div class="dui_pop_bg"  ng-hide="visible" >
+
+<div class="dui_pop_box"  ng-class="{true: 'dui_pop_box', false: 'dui_pop_box inactive'}[isActive]">
+    <div class="dui_pop_title">
+        <h5>pop标题</h5>
+    </div>
+    <div class="dui_pop_cention">
+        <h5>
+            <button class="dui_ok_button">按钮一</button>
+            <button class="dui_ok_button">按钮二</button>
+            <button class="dui_ok_button">按钮三</button>
+            <button class="dui_ok_button">按钮四</button>
+        </h5>
+    </div>
+    <div class="dui_pop_footer">
+        <h5>底部</h5>
+    </div>
+</div>
+    <div class="dui_pop_bg"  ng-hide="visible" ng-click="duinone()"></div>
+</div>
+<script>
+    var app = angular.module('myApp', ['ngAnimate']);
+    app.controller('personCtrl', function($scope) {
+        $scope.visible = true;
+        $scope.isActive=true;
+        $scope.duishow = function () {
+            $scope.visible = false;
+            $scope.isActive = false;
+        }
+        $scope.duinone = function () {
+            $scope.visible = true;
+            $scope.isActive = true;
+        }
+        })
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="/common/image/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Title</title>
+    <!-font-awesome字体图标框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome/css/font-awesome.min.css"/>
+    <!-bootstrap3.0框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/bootstrap/css/bootstrap.min.css"/>
+    <!-angular框架->
+    <script type="text/javascript"  src="../../assets/angularJS/angular.min.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-route.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-animate.min.js"></script>
+    <!-Dui样式->
+    <link rel="stylesheet" type="text/css" href="../../common/css/diudianUI.css"/>
+</head>
+
+<body  ng-app="myApp" ng-controller="personCtrl">
+<button id="del" ng-click="toggle()">测试</button>
+<style>
+    .ng-hide {
+        transition: all linear 0.3s;
+        -webkit-transition: all linear 0.3s;
+        opacity: 0;
+        -webkit-transform: scale(0.01, 0.01);
+        transform: scale(0.01, 0.01);
+    }
+</style>
+<div class="dui_alert_bg"  ng-hide="visible" >
+
+<div class="dui-alert-box">
+    <div class="dui-alert-title dui-box">
+            <div class="dui-flex-1"><h5>弹窗标题</h5></div>
+            <div class="dui-flex-1"><span class="dui-close-win"ng-click=" toggle()"><i class="fa fa-close"></i></span></div>
+    </div>
+    <div class="dui-alert-cention">弹窗内容</div>
+    <h5 class="dui-alert-footer">
+        <div class="dui-flex-1"><button class="dui-button">测试</button></div>
+        <div class="dui-flex-1"><button class="dui-button">测试</button></div>
+        <div class="dui-flex-1"><button class="dui-button">测试</button></div>
+        <div class="dui-flex-1"><button class="dui-button">测试</button></div>
+    </h5>
+</div>
+    <div class="dui_alert_bg mohu"  ng-hide="visible" ng-click="toggle()"></div>
+</div>
+<script>
+    var app = angular.module('myApp', ['ngAnimate']);
+    app.controller('personCtrl', function($scope) {
+        $scope.visible = true;
+        $scope.toggle = function () {
+            $scope.visible = !$scope.visible;
+        }
+        })
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+/* CSS Document */
+.index_show_div .div_active
+{
+	opacity:0.5;
+}
+.index_show_div
+{
+	width:50%;
+	height:500px;
+	border:1px solid #999;
+	float:left;
+	background-color:#7e7e7e;
+}
+.index_show_css
+{
+	width:49.5%;
+	height:500px;
+	border:1px solid #999;
+	background-color:#CCC;
+	font-size:12px;
+	float:left;
+	-webkit-user-select:text; /*禁止页面文字选择 ，此属性不继承，一般加在body上规定整个body的文字都不会自动调整*/
+}
+.index_check_top input[type="text"]
+{
+	width:30px;
+	line-height:15px;
+	background-color:#CCC;
+	border:1px solid #000;
+	border-radius:3px;
+	height:15px;
+	font-size:10px;
+	color:#FFF;
+}
+.index_check_top
+{
+	font-size:12px;
+	line-height:25px;
+	background-color:#666;
+	color:#FFF;
+	height:25px;
+	padding-left:10px;
+}
+.border_check
+{
+	margin-right:10px;
+}
+.win_show_box
+{
+	position:absolute;
+	top:10px;
+	left:10px;
+	background-image:url(../images/touming_bg.png);
+}
+.box_top_this
+{
+	height:25px;
+	
+}
+.win_show_box div:active
+{
+	opacity:0.5;
+}
+.add_div
+{
+	border:1px solid #999;
+	background-color:#666;
+	color:#fff;
+	padding:0px 5px;
+	border-radius:5px;
+	position:relative;
+	top:1px;
+	margin:0 3px;
+}

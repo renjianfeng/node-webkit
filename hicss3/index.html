@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+<style>
+.test_div
+{
+	background-color:#F00;
+	width:100px;
+	height:30px;
+	border-width:2px;
+	border-color:#06F;
+	border-style:solid;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+.win_show_box
+{
+	width:500px;
+	height:300px;
+	position:relative;
+	z-index:9999;
+	overflow:hidden;
+	margin:0px;
+	padding:0px;
+}
+</style>
+</head>
+
+<body>
+<div class="box_top_this">
+<div class="index_check_top">
+ID<input type="text" class="dom_id" /><button class="add_div">新增div</button>
+W:<input class="input_w" type="text" />px
+H:<input class="input_h" type="text" />px
+　　边框宽度
+<span class="border_check">整体:<input class="input_border" type="text" />px</span>
+<span class="border_check">上:<input class="input_border_top" type="text" />px</span>
+<span class="border_check">右:<input class="input_border_right" type="text" />px</span>
+<span class="border_check">下:<input class="input_border_bottom" type="text" />px</span>
+<span class="border_check">左:<input class="input_border_left" type="text" />px</span>
+</div>
+</div>
+<div class="index_show_div">
+	<div class="win_show_box">
+    </div>
+</div>
+<div class="index_show_css">
+
+</div>
+<div class="showxy">
+
+</div>
+
+</body>
+<div class="style_box" id="id_box_dd">
+
+</div>
+<script>
+	//定义选中div变量
+	var div_id=""
+	$(document).ready(function(e) {
+		showDomhtml();
+		//工具栏显示
+			$(".index_check_top").show();
+
+		//舞台div选中更换div变量ID内容
+		$(".win_show_box div").live("mousedown",function(){
+			//为点击的div添加效果
+			$(".win_show_box div").removeClass("div_active");
+			$(".index_check_top input[type='text']").val("");
+			//$(this).addClass("div_active");
+						//id更换为当前选中的ID
+			div_id=$(this).attr("id");
+			})
+			$(".add_div").live("click",function(){
+				var thisDivid=$(".dom_id").val();
+				$(".win_show_box").append("<div class='test_div' id='"+thisDivid+"'></div>");
+				var dd="<div class='style_box' id='id_box_"+thisDivid+"'><div class='style_width'><style></style></div><div class='style_height'><style></style></div><div class='style_border'><style></style></div><div class='style_border_top'><style></style></div><div class='style_border_right'><style></style></div><div class='style_border_bottom'><style></style></div><div class='style_border_left'><style></style></div><div class='style_border_color'><style></style></div></div>"
+				$("body").append(dd);
+				showDomhtml();
+				})
+		/*样式操作*/
+		//div高度
+        $(".input_h").live("keyup",function(){
+			var d=$(this).val();
+			$("#id_box_"+div_id+" .style_height").html("<style> #"+div_id+"{height:"+d+"px;}</style>")
+			})
+		//div宽度
+		 $(".input_w").live("keyup",function(){
+			var d=$(this).val();
+			$("#id_box_"+div_id+" .style_width").html("<style> #"+div_id+"{width:"+d+"px;}</style>")
+			})
+		//div边框宽度
+		$(".input_border").live("keyup",function(){
+			var d=$(this).val();
+			$("#id_box_"+div_id+" .style_border").html("<style> #"+div_id+"{border-width:"+d+"px;}</style>")
+			})
+		//div边框宽度（上）
+		$(".input_border_top").live("keyup",function(){
+			var d=$(this).val();
+			$("#id_box_"+div_id+" .style_border_top").html("<style> #"+div_id+"{border-top-width:"+d+"px;}</style>")
+			})
+		//div边框宽度（上）
+		$(".input_border_right").live("keyup",function(){
+			var d=$(this).val();
+			$("#id_box_"+div_id+" .style_border_right").html("<style> #"+div_id+"{border-right-width:"+d+"px;}</style>")
+			})
+		//div边框宽度（上）
+		$(".input_border_bottom").live("keyup",function(){
+			var d=$(this).val();
+			$("#id_box_"+div_id+" .style_border_bottom").html("<style> #"+div_id+"{border-bottom-width:"+d+"px;}</style>")
+			})
+		//div边框宽度（上）
+		$(".input_border_left").live("keyup",function(){
+			var d=$(this).val();
+			$("#id_box_"+div_id+" .style_border_left").html("<style> #"+div_id+"{border-left-width:"+d+"px;}</style>")
+			})
+			
+			
+			
+			//获取样式
+			$(".index_check_top").live("keyup",function(){
+				showDomhtml();
+				})
+				
+			//移动
+			var wX_2=0;
+			var wY_2=0;
+			var dX=0;
+			var dY=0;
+			var wtX=$(".win_show_box").offset().top;
+			var wtY=$(".win_show_box").offset().left;
+			 var dragging = false; 
+			 var thisDivid
+			$(".test_div").live("mousedown",function(e){
+				thisDivid=$(this).attr("id");
+				dragging = true;
+				//这里可得到鼠标X坐标
+				dX = e.pageX;
+				//这里可以得到鼠标Y坐标
+				dY = e.pageY;
+				})
+			$(window).mousemove(function(e){
+			
+			if(dragging)
+			{
+		    wX_2=coordinatesX(event)-e.pageX;
+			wY_2=coordinatesX(event)-e.pageY;
+			var Y = $("#"+thisDivid+"").offset().top-71;
+			var X = $("#"+thisDivid+"").offset().left-18;
+			//$(".showxy").html("wX_2:"+wX_2+",wY_2:"+wY_2+",dX:"+dX+",dY:"+dY+",pageY:"+e.pageY+",pageX:"+e.pageX+",wtX:"+wtX+",wtY:"+wtY+",");
+			$(".showxy").html("X:"+X+",Y:"+Y+"");
+			$("#"+thisDivid+"").css("margin-left",""+e.pageX-wtX-30+"px");
+			$("#"+thisDivid+"").css("margin-top",""+e.pageY-wtY-30+"px");
+			}
+			
+		})
+		$(window).mouseup(function(){
+			
+			dragging = false;
+			
+			})
+			
+    });
+
+	function coordinatesX(event)
+	{
+	x=event.screenX
+	return x;
+	}
+	function coordinatesY(event)
+	{
+	y=event.screenY
+	return y;
+	}
+	
+	function showDomhtml()
+	{
+				var styleCss="";
+				var styleCount=$(".style_box:eq(0)").find('div').size();
+				var styleCount2=$(".style_box").size();
+				for(var d=0;d<=styleCount2-1;d++)
+				{
+					for(var i=0;i<=styleCount-1;i++)
+					{
+						styleCss=styleCss+$(".style_box:eq("+d+")").find('div:eq('+i+')').find('style').html();				
+					}
+				}
+				var publicStyle=$("style:eq(0)").html();
+				var styleHtml=$(".index_show_div").html();
+				var allDome="<style>"+publicStyle+styleCss+"</style>"+styleHtml+"";
+				//转移字符
+				allDome=$("#x").text(allDome).html();
+				$(".index_show_css").html(allDome);
+				
+	}
+</script>
+<span id="x" style="display:none"></span>
+</html>

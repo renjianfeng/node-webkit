@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="/common/image/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Title</title>
+    <!-font-awesome字体图标框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome/css/font-awesome.min.css"/>
+    <!-bootstrap3.0框架->
+    <link rel="stylesheet" type="text/css" href="../../assets/bootstrap/css/bootstrap.min.css"/>
+    <!-angular框架->
+    <script type="text/javascript"  src="../../assets/angularJS/angular.min.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-route.js"></script>
+    <script type="text/javascript"  src="../../assets/angularJS/angular-animate.min.js"></script>
+
+    <!-绘图FPS->
+    <script type="text/javascript"  src="../../index/js/commonFunctions.js"></script>
+    <!-Dui样式->
+    <link rel="stylesheet" type="text/css" href="../../common/css/diudianUI.css"/>
+    <style>
+        body
+        {
+            background: rgba(225,225,225,0);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            color: #fff;
+            font-size: 12px !important;
+        }
+        .do_body
+        {
+            background: #666;
+            height: 100%;
+            margin: 5px;
+            box-shadow: 0px 0px 5px #444;
+            height: 790px;
+        }
+        /* Let's get this party started */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height:8px;
+            background: #ccc;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #ccc;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background:#666;
+        }
+        ::-webkit-scrollbar-thumb:window-inactive {
+            background: rgba(0,0,0,0.4);
+        }
+        .for_body
+        {
+            border:1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .canvas
+        {
+            background: #ccc;
+        }
+        .header
+        {
+            -webkit-user-select:none;
+            -webkit-app-region:drag;
+        }
+        .top_box
+        {
+            background-color:#727070;
+            display:-webkit-box;
+        }
+        .top
+        {
+            background-color:#727070;
+            -webkit-box-flex:1;
+        }
+        .header
+        {
+            -webkit-user-select: none;
+            /*  -webkit-app-region: drag;    */
+            width:100%;
+            height:30px;
+            line-height:30px;
+            color:#FFF;
+            text-indent:10px;
+        }
+        .header i
+        {
+            width:30px;
+            height:30px;
+            background-repeat:no-repeat;
+            margin:0px;
+        }
+        .check_window
+        {
+            width:30px;
+            height:30px;
+            background-repeat:no-repeat;
+            display:inline-block;
+            margin:0px;
+            padding:0px;
+            margin-left:-2px;
+            background-color:#727070;
+            -webkit-user-select: none;
+        }
+        .check_window:hover
+        {
+            background-color:#898989;
+        }
+        .off_window
+        {
+            background-image:url(../../img/panel_tools.png);
+            background-position:9px 9px;
+
+        }
+        .min_window
+        {
+            background-image:url(../../img/zxh.png);
+            background-position:9px 19px;
+
+        }
+        .sx_window
+        {
+            background-image:url(../../img/shuaxin.png);
+            background-position:7px 7px;
+        }
+        .win_check_box
+        {
+            width:97px;
+            height:30px;
+            text-align:right;
+        }
+        .set_body
+        {
+            padding: 10px;
+        }
+        .form-control
+        {
+            background: #444;
+            color: #fff;
+            font-size: 12px;
+        }
+        label:hover
+        {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body  ng-app="myApp">
+<div class="do_body">
+    <div class="top_box">
+        <div class="top">
+            <p id="header" class="header">
+                <i class="window_ico"></i>
+        <span class="window_title">
+        <span><i class="ico_logo"></i>优百+ v1.0 (测试版) - 工牌生成器</span></span>
+            </p>
+        </div>
+        <div class="win_check_box">
+            <i class="check_window min_window" onclick="minW()"  title="最小化"></i>
+            <i class="check_window off_window"onclick="closeW()" title="关闭"></i>
+        </div>
+    </div>
+    <div class="set_body">
+        <div class="row" ng-controller="personCtrl">
+            <div class="col-xs-3">
+                <div>
+                    <h6>键入工牌关键信息</h6>
+                </div>
+                <div class="for_body" ng-repeat="lanList in listVeds">
+                    <div class="form-group">
+                        <div  style="margin-top: 10px;">
+                            <input type="text" class="form-control"  ng-model="listVeds[$index].emName" placeholder="姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div  style="margin-top: 10px;">
+                            <input type="text" class="form-control"  ng-model="listVeds[$index].emNameEnglish" placeholder="英文名拼写">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div  style="margin-top: 10px;">
+                            <input type="text" class="form-control"  ng-model="listVeds[$index].buName" placeholder="所在部门名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div  style="margin-top: 10px;">
+                            <input type="text" class="form-control"  ng-model="listVeds[$index].buNameEnglish" placeholder="所在部门名称英文拼写">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div  style="margin-top: 10px;">
+                            <input type="text" class="form-control"  ng-model="listVeds[$index].goNumber" placeholder="工号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div  style="margin-top: 10px;">
+                            <input type="text" class="form-control"  ng-model="listVeds[$index].goNumberEnglish" placeholder="Employee No">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fileDialog2" style="cursor: pointer; background: #444;padding: 6px 10px; border-radius: 5px; color:#fff; box-shadow: 0px 0px 5px #444">上传照片</label>
+                    <input id="fileDialog2" style="opacity: 0; height: 0px;" type="file" />
+                    <p class="help-block" id="showfileDialog2" style="color: #fff;">你还没有上传照片!</p>
+                </div>
+
+                <h6 style="line-height: 20px;">提示：上传照片不是一个必须的选择，您可以选择将照片直接打印在工牌上，或将照好的一寸照片直接黏贴在“照片”部分。<br>
+                <br>
+                    <span style="color: #f7ab86;">注意:上传的照片一定要比例协调，不然可能会出现挤压效果！</span>
+                </h6>
+
+                <div style="margin-top: 10px;">
+
+
+                    <button class="btn btn-success"id="saveImageBtn" ng-click="duishow()">
+                        立即生成
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-xs-6" style="overflow: auto; height: 700px;border:1px solid #fff; background: #fff;">
+                <fff></fff>
+                <style>
+                    .canvas
+                    {
+                        margin-top: 25px;
+                    }
+                </style>
+                <canvas class="canvas" id="canvas" width="638" height="1005" onclick="downimg()"></canvas>
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label for="fileDialog">选择保存的文件名</label>
+                    <div  style="margin-top: 10px;">
+                        <input type="text" class="form-control" value="任建锋的工牌"  id="filenameImg" placeholder="文件名称">.png
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fileDialog" style="cursor: pointer; background: #444;padding: 6px 10px; border-radius: 5px; color:#fff; box-shadow: 0px 0px 5px #444">点击选择保存地址</label>
+                    <input id="fileDialog" style="opacity: 0; height: 0px;" type="file" nwdirectory />
+                    <p class="help-block" id="showfileDialog" style="color: #fff;">Hi，请选择文件保存的路径^-^~~</p>
+                </div>
+
+                <h6 style="margin-top: 60px;">提示：此软件仅限我司内部使用，禁止外传！</h6>
+                <h6 style="margin-top: 10px;">使用技术：angularJs、nodejs、node-webkit</h6>
+            </div>
+        </div>
+    </div>
+
+    <div style="background: #444; padding: 13px 0;">
+        <h6 class="text-center">陕西优百信息技术有限公司（仅限公司内部使用）</h6>
+    </div>
+</div>
+
+
+<script>
+    //nodejs模块
+    var gui = require('nw.gui');
+    var win = gui.Window.get();
+    //引入node.js本地应用插件，文件读写对象
+    var fs = require('fs');
+    onload = function() {
+        gui.Window.get().show();
+    }
+
+    function closeW(){
+            win.close();
+    }
+    function minW(){
+            win.minimize();
+    }
+
+    setInterval(function(){
+        var chooser = document.querySelector('#fileDialog');
+        var adds=chooser.value;
+        if(adds==null||adds=="")
+        {
+            document.getElementById("showfileDialog").innerHTML="还没有选择保存地址！";
+        }else
+        {
+            document.getElementById("showfileDialog").innerHTML=adds;
+        }
+
+    },200)
+</script>
+
+
+<script>
+
+    //绘图dom
+    var cavas=document.getElementById('canvas');
+    var context=canvas.getContext('2d');
+    var img=new Image()
+    img.src="../image/gzzbg.png";
+    var neirong="";
+    var titleX="";
+    var topd=0;
+    var topd2=0;
+    var dx=50;
+    var dy=670;
+
+
+
+    function huizhi(emName,emNameEnglish,buName,buNameEnglish,goNumber,goNumberEnglish,emNameL,buNameL,goNumberL){
+      //  window.requestAnimFrame(huizhiTitle)
+        var chooser2 = document.querySelector('#fileDialog2');
+        var adds=chooser2.value;
+        context.beginPath();
+      //  context.clearRect(0,0,500,600);
+
+
+        context.drawImage(img,0,0);
+        if(adds!=null||adds!="")
+        {
+            document.getElementById("showfileDialog2").innerHTML=adds
+            var img2=new Image()
+            img2.src=adds;
+            context.drawImage(img2,170,205,300,420);
+        }else
+        {
+            document.getElementById("showfileDialog2").innerHTML="你还没有上传照片!";
+        }
+        context.font = "34px 微软雅黑";
+        context.fillStyle='#464646';
+        context.fillText(emName,50+dx,50+dy);
+        context.fillText(buName,50+dx,142+dy);
+        context.fillText(goNumber,50+dx,233+dy);
+        context.font = "24px 微软雅黑";
+        context.fillStyle='#2076b5';
+        context.fillText(buNameEnglish,buNameL*34+55+dx,142+dy);
+        context.fillText(emNameEnglish,emNameL*34+55+dx,50+dy);
+        context.fillText(goNumberEnglish,goNumberL*20+55+dx,233+dy);
+        context.closePath();
+
+
+    }
+    function clearR(){
+        context.clearRect(0,0,500,600);
+    }
+    var app = angular.module('myApp', []);
+    app.controller('personCtrl', function($scope) {
+        $scope.listVeds= [
+            {id:"10",emName:"任建锋",emNameEnglish:"Jianfeng Ren",buName:"互联网事业部",buNameEnglish:"Internet Dept",goNumber:"2456555",goNumberEnglish:"Employee NO."}
+        ];
+
+        console.log($scope.listVeds.length);
+            setInterval(function(){
+                clearR()
+                for(i=0;i<$scope.listVeds.length;i++)
+                {
+                   // $scope.listVeds[i].mTop=parseInt($scope.listVeds[i].mTop);
+                   // console.log($scope.listVeds[i].mTop);
+                    var emNameL=$scope.listVeds[i].emName.length;
+                    var buNameL=$scope.listVeds[i].buName.length;
+                    var goNumberL=$scope.listVeds[i].goNumber.length;
+                    huizhi(
+                            $scope.listVeds[i].emName,
+                            "/ "+$scope.listVeds[i].emNameEnglish,
+                            $scope.listVeds[i].buName,
+                            "/ "+$scope.listVeds[i].buNameEnglish,
+                            $scope.listVeds[i].goNumber,
+                            "/ "+$scope.listVeds[i].goNumberEnglish,
+                            emNameL,
+                            buNameL,
+                            goNumberL
+                    );
+                }
+
+            },100)
+    })
+
+
+    window.onload = function() {
+        draw();
+        var saveButton = document.getElementById("saveImageBtn");
+        bindButtonEvent(saveButton, "click", saveImageInfo);
+
+    };
+    function draw(){
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+    }
+
+    function bindButtonEvent(element, type, handler)
+    {
+        if(element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else {
+            element.attachEvent('on'+type, handler);
+        }
+    }
+
+    function saveAsLocalImage ()
+    {
+        var mycanvas = document.getElementById("canvas");
+        var image    = mycanvas.toDataURL("image/png");
+        var w=window.open('about:blank','image from canvas');
+        w.document.write("<img src='"+image+"' alt='from canvas'/>");
+    }
+
+    function saveImageInfo () {
+        var chooser = document.querySelector('#fileDialog');
+        var adds=chooser.value;
+        if(adds==null||adds=="")
+        {
+            alert("还没有选择保存地址！");
+            return;
+        }
+       // alert(chooser.value)
+        var myCanvas = document.getElementById("canvas");
+        // here is the most important part because if you dont replace you will get a DOM 18 exception.
+        // var image = myCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream;Content-Disposition: attachment;filename=foobar.png");
+        var image = myCanvas.toDataURL("image/png");
+       // window.location.href=image; // it will save locally
+      //  alert(image);
+        //过滤头文件
+        var base64Data = image.replace(/^data:image\/\w+;base64,/, "");
+        //nodejs转码
+        var dataBuffer = new Buffer(base64Data, 'base64');
+     //   alert(dataBuffer);
+        var imgName=document.getElementById("filenameImg").value;
+        fs.writeFile(adds+'/'+imgName+'.png', dataBuffer, function (err) {
+            if (err) throw err;
+            console.log('It\'s saved!');
+            alert("保存成功")
+        });
+    }
+
+</script>
+</body>
+</html>
